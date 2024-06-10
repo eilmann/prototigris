@@ -1,0 +1,67 @@
+/* Styling for tournament bracket */
+#bracket-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ccc;
+
+}
+/* Container for the whole bracket */
+#bracket-container {
+    display: flex;
+    flex-direction: row; /* Change flex direction to row */
+    justify-content: space-between; /* Add spacing between rounds */
+    align-items: center;
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    background-color: #ccc;
+    padding-left: 50px;
+    padding-right: 50px;
+
+}
+
+/* Styling for each round */
+.round {
+    padding: 10px;
+    /* No need for margin-bottom */
+}
+
+/* Styling for each match */
+.match {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    width: 200px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Styling for the connecting lines */
+.match::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    width: 40px;
+    border-top: 1px solid #ccc;
+}
+
+/* Styling for the winner of each match */
+.match p:last-child {
+    font-weight: bold;
+}
+
+/* Styling for the winner bracket title */
+#bracket-container > div:nth-child(odd) > h2 {
+    margin-bottom: 10px;
+}
+
+/* Styling for the loser bracket title */
+#bracket-container > div:nth-child(even) > h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
