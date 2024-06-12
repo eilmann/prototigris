@@ -19,6 +19,13 @@ body {
   flex-direction: column;
 }
 
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  border: none;
+}
+
 header {
   position: fixed;
   top: 0;

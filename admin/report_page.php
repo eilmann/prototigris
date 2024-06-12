@@ -43,13 +43,13 @@ include('../includes/session.php');
             </ul>
       </nav>
     </header>
-
+    <main>
     <section class="feed"> 
         <h1>Tournaments Report</h1> 
         <button onclick="window.print()" class="dashboard-button">Print/Save as PDF</button> 
     </section>
 
-    <div id="admin-chart">
+    <section id="admin-chart">
         <ul class="cards">
             <li>
                 <h3>Total Tournaments:</h3>
@@ -68,9 +68,9 @@ include('../includes/session.php');
                 <canvas id="tournamentsByGameTitleChart"></canvas>
             </li>
         </ul>
-    </div>
+    </section>
     <section class="feed"> <h1>Participants Report</h1> </section>
-    <div id="admin-chart">
+    <section id="admin-chart">
         <ul class="cards">
             <li>
                 <h3>Most Active Participants:</h3>
@@ -85,8 +85,8 @@ include('../includes/session.php');
                 <div id="topParticipantsByGameContainer" style="display:flex; flex-direction:row;"></div>
             </li>
         </ul>
-    </div>
-    <script src="chart_functions.js"></script>
+    </section>
+    </main>
     <footer>
       <div>
         <span>Copyright © 2023 All Rights Reserved</span>
@@ -95,5 +95,6 @@ include('../includes/session.php');
         </span>
       </div>
     </footer>
+    <script src="chart_functions.js"></script>
 </body>
 </html>

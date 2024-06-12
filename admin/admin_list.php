@@ -2,7 +2,6 @@
 include('../includes/db.php');
 include('../includes/session.php');
 
-// Function to get admin data by adminID
 function getAdminData($adminID) {
     global $conn;
     $sql = "SELECT * FROM admins WHERE adminID='$adminID'";
@@ -10,14 +9,22 @@ function getAdminData($adminID) {
     return ($result->num_rows > 0) ? $result->fetch_assoc() : null;
 }
 
-// Check if a admin is logged in
+// Check if an admin is logged in
 if (!isAdminLoggedIn()) {
     header("Location: login.php"); // Redirect to login page if not logged in
     exit();
 }
 
-$adminID = $_SESSION['adminID'];
-$adminData = getAdminData($adminID);
+// Function to get all admin data
+function getAllAdmins() {
+    global $conn;
+    $sql = "SELECT adminID, adminName, adminEmail, adminPic FROM admins";
+    $result = $conn->query($sql);
+    return ($result->num_rows > 0) ? $result : null;
+}
+
+$admins = getAllAdmins();
+
 ?>
 
 <!DOCTYPE html>
@@ -26,11 +33,10 @@ $adminData = getAdminData($adminID);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/tigris_logo.png" type="icon">
-    <title>Admin Profile</title>
+    <title>Admin List</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
     <header>
       <nav class="navbar">
         <div class="logo">
@@ -46,7 +52,7 @@ $adminData = getAdminData($adminID);
         <ul class="all-links">
           <li>
                 <?php
-                // Check if a admin is logged in
+                // Check if an admin is logged in
                 if (isAdminLoggedIn()) {
                     $adminID = $_SESSION['adminID'];
                     $adminData = getAdminData($adminID);
@@ -72,24 +78,33 @@ $adminData = getAdminData($adminID);
       </nav>
     </header>
 
-    <main class="form" style="min-width:500px;">
-        <h1 style="margin-bottom: 20px; margin-top: 15px; margin-left: 20px;">Administrator Profile</h1>
-        <p style="margin-left: 20px;"><strong>Admin ID:</strong> <?php echo $adminData['adminID']; ?></p>
-        <p style="margin-left: 20px;"><strong>Name:</strong> <?php echo $adminData['adminName']; ?></p>
-        <p style="margin-left: 20px;"><strong>Email:</strong> <?php echo $adminData['adminEmail']; ?></p>
-        <p style="margin-left: 20px;"><strong>Profile Picture:</strong> <br> <img class="profile-page" src="<?php echo $adminData['adminPic']; ?>" 
-        alt="Profile Picture" style="height: auto; width: 300px; margin-bottom: 20px;"></p>
-
-        <div style="margin-bottom: 25px;">
-            <a class="dashboard-button" href="edit_profile.php" style="padding-left:20px; padding-right:20px; margin-left:20px;">Edit Profile</a>
-        </div>
-        <div class="line" style="margin-bottom: 20px;"></div>
-        <div style="margin-bottom: 20px;">
-          <a class="dashboard-button" href="register.php" style="padding-left:20px; padding-right:20px; margin-left:20px; margin-right:0px">Register New Admin</a>
-            <a class="dashboard-button" href="admin_list.php" style="padding-left:20px; padding-right:20px; margin-left:0px;">View Admin List</a>
-        </div>
-        
-    </main>
+    <section>
+        <h1 style="color:white;">Admin List</h1>
+        <?php if ($admins): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Profile Picture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while($admin = $admins->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo $admin['adminID']; ?></td>
+                            <td><?php echo $admin['adminName']; ?></td>
+                            <td><?php echo $admin['adminEmail']; ?></td>
+                            <td><img src="<?php echo $admin['adminPic']; ?>" alt="Profile Picture" style="height: 100px; width: auto;"></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>No admins found.</p>
+        <?php endif; ?>
+    </section>
 
     <footer>
       <div>
@@ -103,4 +118,3 @@ $adminData = getAdminData($adminID);
     <script src="../js/script.js"></script>
 </body>
 </html>
-

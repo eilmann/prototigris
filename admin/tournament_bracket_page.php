@@ -33,6 +33,122 @@ $tournaments = getTournaments($conn);
     <title>Tournament Bracket and Schedule Generator</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../bracket_styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: #333;
+        }
+
+        .navbar {
+        display: flex;
+        padding: 0 10px;
+        max-width: 1200px;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+        }
+
+        .navbar input#menu-toggler {
+        display: none;
+        }
+
+        .navbar #hamburger-btn {
+        cursor: pointer;
+        display: none;
+        }
+
+        .navbar .all-links {
+        display: flex;
+        align-items: center;
+        }
+
+        .navbar .all-links li {
+        position: relative;
+        list-style: none;
+        }
+
+        .navbar .logo a {
+        display: flex;
+        align-items: center;
+        margin-left: 0;
+        }
+
+        .logo img {
+            max-height: 40px; /* Adjust the height of the logo as needed */
+            margin-right: 10px;
+            margin-left: 20px;
+        }
+
+        header a, footer a {
+        margin-left: 40px;
+        text-decoration: none;
+        color: #fff;
+        height: 100%;
+        padding: 20px 0;
+        display: inline-block;
+        }
+
+        header a:hover, footer a:hover {
+        color: #ddd;
+        }
+
+        .navbar .all-links .profile-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%; /* Make it a circle */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-top: auto; /* Add margin to the top */
+        margin-bottom: auto; /* Add margin to the bottom */
+        }
+
+        nav a.login-button {
+        color: white;
+        background-color: #ff7300;
+        text-decoration: none;
+        padding: 5px 20px;
+        border: 1px solid white;
+        border-radius: 10px;
+        }
+
+        nav a.login-button:hover {
+        background-color: #555;
+        }
+
+        footer {
+        margin-top: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background: #000;
+        padding: 20px 0;
+        }
+
+        footer div {
+        padding: 0 10px;
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        }
+
+        footer span {
+        color: #fff;
+        }
+
+        footer a {
+        padding: 0;
+        }
+    </style>
 </head>
 <body style="background-color: #ccc">
 
@@ -41,64 +157,72 @@ $tournaments = getTournaments($conn);
         <div class="logo">
             <a href="dashboard.php"><img src="../img/tigris_logo.png" alt="logo">Administrator Dashboard</a>
         </div>
-            <ul class="all-links">
-                <li><a class="login-button" href="logout.php">Logout</a></li>
-            </ul>
       </nav>
     </header>
     
-    <section id="bracket-section">
-        <h1>Bracket & Schedule Generator</h1>
-        <form id="tournament-form">
-            <label for="tournament-select">Select Tournament:</label>
-            <select id="tournament-select" name="formID" onchange="updateTournamentDates()">
-                <?php foreach ($tournaments as $tournament): ?>
-                    <option value="<?php echo $tournament['formID']; ?>" 
-                            data-start-date="<?php echo $tournament['tournamentStartDate']; ?>" 
-                            data-end-date="<?php echo $tournament['tournamentEndDate']; ?>">
-                        <?php echo $tournament['formTitle']; ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+    <div class="container mt-5">
+        <section id="bracket-section" class="text-center">
+            <h1>Bracket & Schedule Generator</h1>
+            <form id="tournament-form" class="form-inline justify-content-center">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="tournament-select" class="sr-only">Select Tournament</label>
+                    <select id="tournament-select" name="formID" class="form-control" onchange="updateTournamentDates()">
+                        <?php foreach ($tournaments as $tournament): ?>
+                            <option value="<?php echo $tournament['formID']; ?>" 
+                                    data-start-date="<?php echo $tournament['tournamentStartDate']; ?>" 
+                                    data-end-date="<?php echo $tournament['tournamentEndDate']; ?>">
+                                <?php echo $tournament['formTitle']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
-            <div>
-                <label><input type="radio" name="elimination-type" value="single" checked> Single Elimination</label>
-                <label><input type="radio" name="elimination-type" value="double"> Double Elimination</label>
+                <div class="form-group mx-sm-3 mb-2">
+                    <label class="mr-2">Elimination Type:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="elimination-type" value="single" checked>
+                        <label class="form-check-label">Single</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="elimination-type" value="double">
+                        <label class="form-check-label">Double</label>
+                    </div>
+                </div>
+
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="start-time" class="sr-only">Start Time</label>
+                    <input type="time" id="start-time" name="startTime" class="form-control" required>
+                </div>
+
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="end-time" class="sr-only">End Time</label>
+                    <input type="time" id="end-time" name="endTime" class="form-control" required>
+                </div>
+
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="match-duration" class="sr-only">Match Duration</label>
+                    <input type="number" id="match-duration" name="matchDuration" class="form-control" placeholder="Match Duration (minutes)" required>
+                </div>
+
+                <button type="button" id="generate-button" class="btn btn-primary mb-2">Generate Bracket</button>
+                <button type="button" id="publish-button" class="btn btn-success mb-2" style="display: none;">Publish Bracket</button>
+            </form>
+
+            <div id="tournament-dates" class="mt-3">
+                <p>Start Date: <span id="tournament-start-date"></span></p>
+                <p>End Date: <span id="tournament-end-date"></span></p>
             </div>
-
-            <div>
-                <label for="start-time">Start Time:</label>
-                <input type="time" id="start-time" name="startTime" required>
-            </div>
-
-            <div>
-                <label for="end-time">End Time:</label>
-                <input type="time" id="end-time" name="endTime" required>
-            </div>
-
-            <div>
-                <label for="match-duration">Match Duration (minutes):</label>
-                <input type="number" id="match-duration" name="matchDuration" required>
-            </div>
-
-            <button type="button" id="generate-button">Generate Bracket</button>
-            <button type="button" id="publish-button" style="display: none;">Publish Bracket</button>
-        </form>
-
-        <div id="tournament-dates">
-            <p>Start Date: <span id="tournament-start-date"></span></p>
-            <p>End Date: <span id="tournament-end-date"></span></p>
-        </div>
-    </section>
-           
-    <div id="message-container"></div>
-    <div id="bracket-container"></div>
+        </section>
+        
+        <div id="message-container"></div>
+        <div id="bracket-container" class="mt-5"></div>
+    </div>
 
     <footer>
       <div>
         <span>Copyright © 2023 All Rights Reserved</span>
         <span class="link">
-            <a href="dashboard.php">Home</a>
+            <a href="#">Home</a>
         </span>
       </div>
     </footer>
@@ -239,10 +363,8 @@ $tournaments = getTournaments($conn);
                     const matchDiv = document.createElement('div');
                     matchDiv.classList.add('match');
                     if (roundIndex === 0) {
-                        // First round of the winner bracket
                         matchDiv.innerHTML = `<p>Match ${String.fromCharCode(65 + matchCounter)}:<br> ${match[0]} vs ${match[1]}</p>`;
                     } else {
-                        // Other rounds of the winner bracket
                         matchDiv.innerHTML = `<p>Match ${String.fromCharCode(65 + matchCounter)}</p>`;
                     }
                     matchCounter++;
@@ -279,7 +401,7 @@ $tournaments = getTournaments($conn);
             finalsDiv.appendChild(finalMatchDiv);
             container.appendChild(finalsDiv);
         }
- 
+
         function displaySchedule(schedule) {
             const container = document.getElementById('bracket-container');
             const scheduleDiv = document.createElement('div');
@@ -296,3 +418,5 @@ $tournaments = getTournaments($conn);
     </script>
 </body>
 </html>
+
+

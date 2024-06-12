@@ -157,6 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <button type="submit" name="update">Save Changes</button>
             <button type="submit" name="delete" onclick="return confirm('Are you sure you want to delete your profile?');">Delete Profile</button>
+            <a href="view_profile.php" style="text-decoration:none; margin-left:10px">Cancel</a>
         </form>
     </main>
 

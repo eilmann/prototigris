@@ -31,36 +31,26 @@ function generateSingleEliminationBracket($participants) {
 }
 
 function generateDoubleEliminationBracket($participants) {
-    $numParticipants = count($participants);
     $winnerBracket = generateSingleEliminationBracket($participants);
-    $loserBracket = [];
+    $numRounds = count($winnerBracket);
+    $loserBracket = array_fill(0, $numRounds, []);
 
-    $roundsInWinnersBracket = count($winnerBracket);
-
-    // Populate loser bracket
-    for ($round = 0; $round < $roundsInWinnersBracket; $round++) {
+    for ($round = 0; $round < $numRounds; $round++) {
+        $numMatchesWB = count($winnerBracket[$round]);
+        
         if ($round == 0) {
-            // First round losers
-            $loserBracket[] = [
-                ['', ''],
-                ['', '']
-            ];
-        } else if ($round == 1) {
-            // Second round losers
-            $loserBracket[] = [
-                ['', ''],
-                ['', '']
-            ];
-        } else if ($round == 2) {
-            // Third round losers
-            $loserBracket[] = [
-                ['', '']
-            ];
-        } else if ($round == 3) {
-            // Fourth round losers
-            $loserBracket[] = [
-                ['', '']
-            ];
+            // First round in loser's bracket gets half the matches of the first round in winner's bracket
+            for ($i = 0; $i < $numMatchesWB / 2; $i++) {
+                $loserBracket[$round][] = ['', ''];
+            }
+        } else if ($round == $numRounds - 1) {
+            // Last round in loser's bracket has 1 match
+            $loserBracket[$round][] = ['', ''];
+        } else {
+            // Middle rounds in loser's bracket match the count of the previous round in loser's bracket
+            for ($i = 0; $i < count($loserBracket[$round - 1]); $i++) {
+                $loserBracket[$round][] = ['', ''];
+            }
         }
     }
 
@@ -208,4 +198,6 @@ header('Content-Type: application/json');
 echo json_encode(["error" => "Method Not Allowed"]);
 
 $conn->close();
+
+
 

@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($conn->query($sql) === TRUE) {
                 // Registration successful, redirect to login page
-                echo '<script>alert("Registration successful!"); window.location.href = "dashboard.php";</script>';
+                echo '<script>alert("Registration successful!"); window.location.href = "login.php";</script>';
                 exit();
             } else {
                 echo '<script>alert("Error: ' . $sql . '<br>' . $conn->error . '"); window.history.back();</script>';
@@ -158,8 +158,7 @@ $conn->close();
         <input type="password" name="confirmPassword" id="confirmPassword" required>
 
         <button type="submit">Register</button>
-
-        <p>Already have an account? <a href="login.php">Login</a></p>
+        <a href="view_profile.php" style="text-decoration:none; margin-left: 5px;">Cancel</a>
     </form>
 </main>
 
