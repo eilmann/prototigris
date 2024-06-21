@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($participantPW, $row['participantPW'])) {
             // Successful login
             loginParticipant($row['participantID'], $row['participantName']);
-            header("Location: ../client/index.php"); // Redirect to participant homepage
+            header("Location: ../index.php"); // Redirect to participant homepage
             exit();
         } else {
             // Invalid password
@@ -57,7 +57,7 @@ $conn->close();
 <header>
     <nav class="navbar">
         <div class="logo">
-            <a href="../client/index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
+            <a href="../index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
         </div>
     </nav>
 </header>
@@ -91,7 +91,7 @@ $conn->close();
     <div>
         <span>Copyright © 2023 All Rights Reserved</span>
         <span class="link">
-            <a href="../client/index.php">Home</a>
+            <a href="../index.php">Home</a>
         </span>
     </div>
 </footer>

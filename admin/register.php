@@ -73,10 +73,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // If everything is ok, try to upload file
         if (move_uploaded_file($_FILES["adminPic"]["tmp_name"], $targetFile)) {
+            $hashedPassword = password_hash($adminPW, PASSWORD_DEFAULT);
 
             // File uploaded successfully, continue with database insert
             $sql = "INSERT INTO admins (adminID, adminName, adminEmail, adminPic, adminPW) 
-                    VALUES ('$adminID', '$adminName', '$adminEmail', '$targetFile', '$adminPW')";
+                    VALUES ('$adminID', '$adminName', '$adminEmail', '$targetFile', '$hashedPassword')";
 
             if ($conn->query($sql) === TRUE) {
                 // Registration successful, redirect to login page
@@ -166,7 +167,7 @@ $conn->close();
     <div>
         <span>Copyright © 2023 All Rights Reserved</span>
         <span class="link">
-            <a href="../client/index.php">Home</a>
+            <a href="../index.php">Home</a>
         </span>
     </div>
 </footer>

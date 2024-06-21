@@ -204,7 +204,7 @@ $tournaments = getTournaments($conn);
                     <input type="number" id="match-duration" name="matchDuration" class="form-control" placeholder="Match Duration (minutes)" required>
                 </div>
 
-                <button type="button" id="generate-button" class="btn btn-primary mb-2">Generate Bracket</button>
+                <button type="button" id="generate-button" class="btn btn-primary mb-2">Generate</button>
                 <button type="button" id="publish-button" class="btn btn-success mb-2" style="display: none;">Publish Bracket</button>
             </form>
 

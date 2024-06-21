@@ -34,7 +34,7 @@ $participantData = getParticipantData($participantID);
     <header>
       <nav class="navbar">
         <div class="logo">
-            <a href="../client/index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
+            <a href="../index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
         </div>
         <input type="checkbox" id="menu-toggler">
         <label for="menu-toggler" id="hamburger-btn">
@@ -44,11 +44,11 @@ $participantData = getParticipantData($participantID);
           </svg>
         </label>
         <ul class="all-links">
-            <li><a href="../client/index.php#home">Home</a></li>
-            <li><a href="../client/index.php#join_tournament">Join Tournament</a></li>
-            <li><a href="../client/index.php#fixture">Fixture</a></li>
-            <li><a href="../client/index.php#result">Result</a></li>
-            <li><a href="../client/index.php#about">About Us</a></li>
+            <li><a href="../index.php#home">Home</a></li>
+            <li><a href="../index.php#join_tournament">Join Tournament</a></li>
+            <li><a href="../index.php#fixture">Fixture</a></li>
+            <li><a href="../index.php#result">Result</a></li>
+            <li><a href="../index.php#about">About Us</a></li>
             <li>
                 <?php
                 // Check if a participant is logged in

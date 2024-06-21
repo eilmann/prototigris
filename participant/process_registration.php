@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($checkStmt->num_rows > 0) {
         // Display a pop-up message
-        echo '<script>alert("Error: Application already exists for this participant."); window.location.href = "../client/index.php";</script>';
+        echo '<script>alert("Error: Application already exists for this participant."); window.location.href = "../index.php";</script>';
         exit();
     }
 
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Display a pop-up message
-        echo '<script>alert("Registration successful!"); window.location.href = "../client/index.php";</script>';
+        echo '<script>alert("Registration successful!"); window.location.href = "../index.php";</script>';
     } else {
         // Display a pop-up message with the error details
         echo '<script>alert("Error: ' . $insertSql . ' ' . $stmt->error . '");</script>';

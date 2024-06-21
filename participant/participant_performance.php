@@ -74,11 +74,11 @@ $conn->close();
           </svg>
         </label>
         <ul class="all-links">
-        <li><a href="../client/index.php#home">Home</a></li>
-            <li><a href="../client/index.php#join_tournament">Join Tournament</a></li>
-            <li><a href="../client/index.php#fixture">Fixture</a></li>
-            <li><a href="../client/index.php#result">Result</a></li>
-            <li><a href="../client/index.php#about">About Us</a></li>
+        <li><a href="../index.php#home">Home</a></li>
+            <li><a href="../index.php#join_tournament">Join Tournament</a></li>
+            <li><a href="../index.php#fixture">Fixture</a></li>
+            <li><a href="../index.php#result">Result</a></li>
+            <li><a href="../index.php#about">About Us</a></li>
             <li><a class="login-button" href="../participant/logout.php">Logout</a></li>
         </ul>
       </nav>

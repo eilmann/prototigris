@@ -1,6 +1,6 @@
 <?php
-include('../includes/db.php');
-include('../includes/session.php');
+include('./includes/db.php');
+include('./includes/session.php');
 
 function getParticipantData($participantID) {
   global $conn;
@@ -18,10 +18,10 @@ function getParticipantData($participantID) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="icon" href="../img/tigris_logo.png" type="icon">
+    <link rel="icon" href="./img/tigris_logo.png" type="icon">
     <title>UTHM Tigris E-Sports Website</title>
     
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   </head>
 
@@ -29,7 +29,7 @@ function getParticipantData($participantID) {
     <header>
       <nav class="navbar">
         <div class="logo">
-            <a href="index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
+            <a href="index.php"><img src="./img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
         </div>
         <input type="checkbox" id="menu-toggler">
         <label for="menu-toggler" id="hamburger-btn">
@@ -51,11 +51,11 @@ function getParticipantData($participantID) {
                     $participantID = $_SESSION['participantID'];
                     $participantData = getParticipantData($participantID);
                     ?>
-                    <a class="profile-link" href="../participant/view_profile.php" style="background-image: url('<?php echo $participantData['participantPic']; ?>')"></a>
+                    <a class="profile-link" href="./participant/view_profile.php" style="background-image: url('<?php echo $participantData['participantPic']; ?>')"></a>
                     <?php
                 } else {
                     ?>
-                    <a class="login-button" href="../participant/login.php">Login</a>
+                    <a class="login-button" href="./participant/login.php">Login</a>
                     <?php
                 }
                 ?>
@@ -64,7 +64,7 @@ function getParticipantData($participantID) {
             // Show logout button if participant is logged in
             if (isParticipantLoggedIn()) {
                 ?>
-                <li><a class="login-button" href="../participant/logout.php">Logout</a></li>
+                <li><a class="login-button" href="./participant/logout.php">Logout</a></li>
                 <?php
             }
             ?>
@@ -75,7 +75,7 @@ function getParticipantData($participantID) {
     <section class="homepage" id="home">
         <div class="background-video">
             <video autoplay loop muted>
-              <source src="../img/tigris_vid.mp4" type="video/mp4">
+              <source src="./img/tigris_vid.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
         </div>
@@ -125,7 +125,7 @@ function getParticipantData($participantID) {
               // Check tournament status
               $status = getTournamentStatus($row['tournamentStartDate'], $row['tournamentEndDate']);
               if ($status == "upcoming") {
-                  echo '<a href="../participant/tournament_registration.php?formID=' . $row['formID'] . '">Join Tournament</a>';
+                  echo '<a href="./participant/tournament_registration.php?formID=' . $row['formID'] . '">Join Tournament</a>';
               } else {
                   echo '<a href="" class="isDisabled">Registration Closed</a>';
               }

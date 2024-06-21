@@ -14,12 +14,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Fetch the user data
         $row = $result->fetch_assoc();
 
+        // Verify the password
+        if (password_verify($adminPW, $row['adminPW'])) {
+            // Successful login
             loginAdmin($row['adminID'], $row['adminName']);
             header("Location: dashboard.php"); // Redirect to admin homepage
             exit();
-        
+        } else {
+            // Invalid password
+            $_SESSION['loginError'] = "Invalid admin ID or password";
+            header("Location: login.php"); // Redirect back to the login page
+            exit();
+        }
     } else {
-        // Invalid admin ID or password
+        // Invalid admin ID
         $_SESSION['loginError'] = "Invalid admin ID or password";
         header("Location: login.php"); // Redirect back to the login page
         exit();
@@ -49,7 +57,7 @@ $conn->close();
     <header>
       <nav class="navbar">
         <div class="logo">
-            <a href="../client/index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
+            <a href="../index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
         </div>
       </nav>
     </header>
@@ -65,7 +73,7 @@ $conn->close();
 
             <button type="submit">Login</button>
 
-            <p>Not an admin? <a href="../client/index.php">Go back to main page</a></p>
+            <p>Not an admin? <a href="../index.php">Go back to main page</a></p>
 
         </form>
 
@@ -83,7 +91,7 @@ $conn->close();
       <div>
         <span>Copyright © 2023 All Rights Reserved</span>
         <span class="link">
-            <a href="../client/index.php">Home</a>
+            <a href="../index.php">Home</a>
         </span>
       </div>
     </footer>

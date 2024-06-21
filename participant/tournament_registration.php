@@ -7,7 +7,7 @@ include('../includes/session.php');
 echo '<script>
         function showErrorAndRedirect() {
             alert("Registration form not found.");
-            window.location.href = "../client/index.php"; // Redirect to the homepage
+            window.location.href = "../index.php"; // Redirect to the homepage
         }
       </script>';
 
@@ -54,7 +54,7 @@ if (isset($_GET['formID'])) {
         <header>
         <nav class="navbar">
           <div class="logo">
-              <a href="../client/index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
+              <a href="../index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
           </div>
           <input type="checkbox" id="menu-toggler">
           <label for="menu-toggler" id="hamburger-btn">
@@ -64,11 +64,11 @@ if (isset($_GET['formID'])) {
             </svg>
           </label>
           <ul class="all-links">
-            <li><a href="../client/index.php#home">Home</a></li>
-            <li><a href="../client/index.php#join_tournament">Join Tournament</a></li>
-            <li><a href="../client/index.php#fixture">Fixture</a></li>
-            <li><a href="../client/index.php#result">Result</a></li>
-            <li><a href="../client/index.php#about">About Us</a></li>
+            <li><a href="../index.php#home">Home</a></li>
+            <li><a href="../index.php#join_tournament">Join Tournament</a></li>
+            <li><a href="../index.php#fixture">Fixture</a></li>
+            <li><a href="../index.php#result">Result</a></li>
+            <li><a href="../index.php#about">About Us</a></li>
             <li><a class="login-button" href="logout.php">Logout</a></li>
           </ul>
         </nav>
@@ -139,14 +139,14 @@ if (isset($_GET['formID'])) {
         // If the form is not found, display the error and redirect
         echo '<script>
                 alert("Registration is not open yet.");
-                window.location.href = "../client/index.php";
+                window.location.href = "../index.php";
               </script>';
     }
 } else {
     // If the formID is not provided in the URL, display the error and redirect
     echo '<script>
             alert("FormID not provided in the URL.");
-            window.location.href = "../client/index.php";
+            window.location.href = "../index.php";
           </script>';
 }
 

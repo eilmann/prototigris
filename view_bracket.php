@@ -1,6 +1,6 @@
 <?php
-include('../includes/db.php');
-include('../includes/session.php');
+include('./includes/db.php');
+include('./includes/session.php');
 
 function getParticipantData($participantID) {
     global $conn;
@@ -219,10 +219,10 @@ function displaySchedule($conn, $bracketID) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../img/tigris_logo.png" type="icon">
+    <link rel="icon" href="./img/tigris_logo.png" type="icon">
     <title>View Bracket</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../bracket_styles.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bracket_styles.css">
     <!-- Add any additional stylesheets here -->
 </head>
 <body style="background-color: #ccc;">
@@ -230,7 +230,7 @@ function displaySchedule($conn, $bracketID) {
 <header>
       <nav class="navbar">
         <div class="logo">
-            <a href="index.php"><img src="../img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
+            <a href="index.php"><img src="./img/tigris_logo.png" alt="logo">UTHM TIGRIS E-SPORTS WEBSITE</a>
         </div>
         <input type="checkbox" id="menu-toggler">
         <label for="menu-toggler" id="hamburger-btn">
@@ -240,11 +240,11 @@ function displaySchedule($conn, $bracketID) {
           </svg>
         </label>
         <ul class="all-links">
-            <li><a href="../client/index.php#home">Home</a></li>
-          <li><a href="../client/index.php#join_tournament">Join Tournament</a></li>
-          <li><a href="../client/index.php#fixture">Fixture</a></li>
-          <li><a href="../client/index.php#result">Result</a></li>
-          <li><a href="../client/index.php#about">About Us</a></li>
+            <li><a href="./index.php#home">Home</a></li>
+          <li><a href="./index.php#join_tournament">Join Tournament</a></li>
+          <li><a href="./index.php#fixture">Fixture</a></li>
+          <li><a href="./index.php#result">Result</a></li>
+          <li><a href="./index.php#about">About Us</a></li>
           <li>
                 <?php
                 // Check if a participant is logged in
@@ -252,11 +252,11 @@ function displaySchedule($conn, $bracketID) {
                     $participantID = $_SESSION['participantID'];
                     $participantData = getParticipantData($participantID);
                     ?>
-                    <a class="profile-link" href="../participant/view_profile.php" style="background-image: url('<?php echo $participantData['participantPic']; ?>')"></a>
+                    <a class="profile-link" href="./participant/view_profile.php" style="background-image: url('<?php echo $participantData['participantPic']; ?>')"></a>
                     <?php
                 } else {
                     ?>
-                    <a class="login-button" href="../participant/login.php">Login</a>
+                    <a class="login-button" href="./participant/login.php">Login</a>
                     <?php
                 }
                 ?>
@@ -265,7 +265,7 @@ function displaySchedule($conn, $bracketID) {
             // Show logout button if participant is logged in
             if (isParticipantLoggedIn()) {
                 ?>
-                <li><a class="login-button" href="../participant/logout.php">Logout</a></li>
+                <li><a class="login-button" href="./participant/logout.php">Logout</a></li>
                 <?php
             }
             ?>
